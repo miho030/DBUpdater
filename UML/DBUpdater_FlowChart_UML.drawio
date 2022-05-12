@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-05-12T07:40:50.132Z" agent="5.0 (Windows)" etag="yQV9dUW0o8zYgleMcieF" version="18.0.3" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-05-12T08:06:31.782Z" agent="5.0 (Windows)" etag="450pljEZ7zvdCuHscSOB" version="18.0.3" type="github" pages="2">
   <diagram name="Page-1" id="c7488fd3-1785-93aa-aadb-54a6760d102a">
     <mxGraphModel dx="1422" dy="772" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
       <root>
@@ -11,12 +11,60 @@
     </mxGraphModel>
   </diagram>
   <diagram id="1hb-my2X-x3pS9e50QhC" name="Socket Flow">
-    <mxGraphModel dx="2249" dy="772" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2012" dy="643" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="b3T2GeBTZuaGaqqM4VVY-1" value="Socket Queue" style="swimlane;" vertex="1" parent="1">
-          <mxGeometry x="-240" y="50" width="1070" height="600" as="geometry" />
+          <mxGeometry x="-240" y="50" width="600" height="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-8" value="Accept" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-1">
+          <mxGeometry x="230.75" y="430" width="103" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-12" value="소켓 검사" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-1">
+          <mxGeometry x="227" y="560" width="110.5" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-37" value="" style="image;html=1;image=img/lib/clip_art/computers/Server_Rack_128x128.png" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-1">
+          <mxGeometry x="239" y="70" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-38" value="Socket" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-1">
+          <mxGeometry x="227" y="180" width="103" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-39" value="Bind" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-1">
+          <mxGeometry x="227" y="223" width="103" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-40" value="&lt;div&gt;Listen&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-1">
+          <mxGeometry x="227" y="265" width="103" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-41" value="&lt;div&gt;원하는 작업&lt;/div&gt;&lt;div&gt;Data 송수신 포함&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-1">
+          <mxGeometry x="231.25" y="700" width="103" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-42" value="Close Socket" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-1">
+          <mxGeometry x="227" y="880" width="103" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-43" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;disconnected&lt;/div&gt;&lt;div&gt;Queue&lt;br&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-1">
+          <mxGeometry x="463.75" y="870" width="81.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-44" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;connected&lt;/div&gt;&lt;div&gt;Queue&lt;br&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-1">
+          <mxGeometry x="463.75" y="690" width="81.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-46" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Ready&lt;br&gt;&lt;/div&gt;&lt;div&gt;Queue&lt;br&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-1">
+          <mxGeometry x="463.75" y="420" width="81.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-20" value="소켓 검사 List" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="-460" y="500" width="140" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-21" value="#1 소켓 유효 검사" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-20">
+          <mxGeometry y="26" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-22" value="#2 Magic 검사" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-20">
+          <mxGeometry y="52" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-23" value="#3 파일 크기 검사" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-20">
+          <mxGeometry y="78" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-27" value="" style="image;html=1;image=img/lib/clip_art/computers/Workstation_128x128.png" vertex="1" parent="1">
+          <mxGeometry x="1030" y="30" width="80" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
