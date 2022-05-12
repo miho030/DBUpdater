@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-05-12T08:58:51.445Z" agent="5.0 (Windows)" etag="7RBduL9a1kqBi7sVN0md" version="18.0.3" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-05-12T09:11:49.152Z" agent="5.0 (Windows)" etag="i_rS-h9KmcwQVewMH9tK" version="18.0.3" type="github" pages="2">
   <diagram name="Page-1" id="c7488fd3-1785-93aa-aadb-54a6760d102a">
     <mxGraphModel dx="1422" dy="772" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
       <root>
@@ -11,7 +11,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="1hb-my2X-x3pS9e50QhC" name="Socket Flow">
-    <mxGraphModel dx="2012" dy="643" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1965" dy="618" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -90,13 +90,13 @@
         <mxCell id="b3T2GeBTZuaGaqqM4VVY-88" value="소켓 검사 List" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-92">
           <mxGeometry x="25" y="74" width="110" height="104" as="geometry" />
         </mxCell>
-        <mxCell id="b3T2GeBTZuaGaqqM4VVY-89" value="#1 소켓 유효 검사" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-88">
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-89" value="1. 소켓 유효 검사" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-88">
           <mxGeometry y="26" width="110" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="b3T2GeBTZuaGaqqM4VVY-90" value="#2 Magic 검사" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-88">
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-90" value="2. Magic 검사" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-88">
           <mxGeometry y="52" width="110" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="b3T2GeBTZuaGaqqM4VVY-91" value="#3 파일 크기 검사" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-88">
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-91" value="3. 파일 크기 검사" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-88">
           <mxGeometry y="78" width="110" height="26" as="geometry" />
         </mxCell>
         <mxCell id="b3T2GeBTZuaGaqqM4VVY-86" value="소켓 검사" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-92">
@@ -109,18 +109,63 @@
           <mxGeometry x="1030" y="30" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="b3T2GeBTZuaGaqqM4VVY-46" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Ready&lt;br&gt;&lt;/div&gt;&lt;div&gt;Queue&lt;br&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="530" y="870" width="81.5" height="50" as="geometry" />
+          <mxGeometry x="-460" y="700" width="81.5" height="50" as="geometry" />
         </mxCell>
         <mxCell id="b3T2GeBTZuaGaqqM4VVY-44" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;connected&lt;/div&gt;&lt;div&gt;Queue&lt;br&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="530" y="1040" width="81.5" height="50" as="geometry" />
+          <mxGeometry x="-460" y="860.58" width="81.5" height="50" as="geometry" />
         </mxCell>
         <mxCell id="b3T2GeBTZuaGaqqM4VVY-43" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;disconnected&lt;/div&gt;&lt;div&gt;Queue&lt;br&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="530" y="1210" width="81.5" height="50" as="geometry" />
+          <mxGeometry x="-460" y="1000" width="81.5" height="50" as="geometry" />
         </mxCell>
         <mxCell id="b3T2GeBTZuaGaqqM4VVY-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="b3T2GeBTZuaGaqqM4VVY-58">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="245" y="880" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-96" value="Yes" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="244.66666666666666" y="860.5779816513761" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-100" value="만약 ready queue가 없는데&#xa;새로 들어온 소켓이 있다면" style="swimlane;fontSize=9;startSize=39;" vertex="1" parent="1">
+          <mxGeometry x="440" y="760" width="220" height="127" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-108" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="b3T2GeBTZuaGaqqM4VVY-109" target="b3T2GeBTZuaGaqqM4VVY-111">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-109" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="930" width="129.99999999999997" height="188" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-110" value="&lt;div&gt;Check dis&lt;/div&gt;&lt;div&gt;queue&lt;br&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="447.1166666666667" y="1049.0091743119267" width="95.76666666666667" height="47.43119266055046" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-111" value="&lt;div&gt;Check rea&lt;br&gt;&lt;/div&gt;&lt;div&gt;queue&lt;br&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="447.3333333333333" y="954.1467889908257" width="95.76666666666667" height="47.43119266055046" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-112" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="b3T2GeBTZuaGaqqM4VVY-111" target="b3T2GeBTZuaGaqqM4VVY-110">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-113" value="Yes" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="490.6666666666667" y="1001.5779816513761" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-114" value="No" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="430" y="954.15" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-117" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="629" y="990" width="231" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-118" value="Check ready queue list" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="640" y="1000" width="200" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-119" value="1. 해당 소켓 예외처리" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-118">
+          <mxGeometry y="26" width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-120" value="2. 소켓의 client에게 예외 정보 send&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-118">
+          <mxGeometry y="52" width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-121" value="3. 해당 소켓 close" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="b3T2GeBTZuaGaqqM4VVY-118">
+          <mxGeometry y="78" width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="b3T2GeBTZuaGaqqM4VVY-122" value="&lt;div&gt;Check rea&lt;br&gt;&lt;/div&gt;&lt;div&gt;queue&lt;br&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="686.5" y="1132" width="110.5" height="55" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
