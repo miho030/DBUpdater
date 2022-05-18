@@ -1,0 +1,6 @@
+﻿  main.cpp
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\Socket\socket_example\main.cpp(41,32): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\Socket\socket_example\main.cpp(43,61): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\Socket\socket_example\main.cpp(114,32): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\Socket\socket_example\main.cpp(116,59): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  test.vcxproj -> C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\Socket\socket_example\x64\Debug\test.exe

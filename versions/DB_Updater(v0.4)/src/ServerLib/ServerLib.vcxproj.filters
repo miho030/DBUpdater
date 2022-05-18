@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="CConnectionSuper">
+      <UniqueIdentifier>{528f4980-2748-4823-9299-12bfe82a4f01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CServer">
+      <UniqueIdentifier>{85b7dbc4-0f25-4432-a965-dcb9b6fc83bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="CConnectionSuper.h">
+      <Filter>CConnectionSuper</Filter>
+    </ClInclude>
+    <ClInclude Include="CServer.h">
+      <Filter>CServer</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CConnectionSuper.cpp">
+      <Filter>CConnectionSuper</Filter>
+    </ClCompile>
+    <ClCompile Include="CServer.cpp">
+      <Filter>CServer</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

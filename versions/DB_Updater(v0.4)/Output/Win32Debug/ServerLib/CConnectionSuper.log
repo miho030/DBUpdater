@@ -1,0 +1,16 @@
+﻿  CConnectionSuper.cpp
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CServer.h(9,14): error C2065: 'CConnectionSuper': 선언되지 않은 식별자입니다.
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CServer.h(9,31): error C2059: 구문 오류: '>'
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CServer.h(18,14): error C2065: 'CConnectionSuper': 선언되지 않은 식별자입니다.
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CServer.h(18,31): error C2059: 구문 오류: '>'
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CServer.h(19,13): error C2065: 'CConnectionSuper': 선언되지 않은 식별자입니다.
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CServer.h(19,30): error C2059: 구문 오류: '>'
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CServer.h(20,11): error C2065: 'CConnectionSuper': 선언되지 않은 식별자입니다.
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CServer.h(20,28): error C2059: 구문 오류: '>'
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CServer.h(21,13): error C2065: 'CConnectionSuper': 선언되지 않은 식별자입니다.
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CServer.h(21,30): error C2059: 구문 오류: '>'
+  CServer.cpp
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CConnectionSuper.h(8,9): error C2143: 구문 오류: ';'이(가) '*' 앞에 없습니다.
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CConnectionSuper.h(8,9): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\악성코드DB업데이터\DB_Updater(v0.4)\src\CConnectionSuper\CConnectionSuper.h(8,20): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
+  코드를 생성하고 있습니다...

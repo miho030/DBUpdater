@@ -1,0 +1,2 @@
+C:\Users\miho0\Desktop\악성코드검거단\1. 세미나 관련\0. 세미나 내용 정리\04.22_세미나_내용\socket_example\x64\Debug\test.exe
+C:\Users\miho0\Desktop\악성코드검거단\2. R&D 관련\Socket\socket_example\x64\Debug\test.exe
