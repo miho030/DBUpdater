@@ -12,5 +12,3 @@ struct ST_WSA_INITIALIZER
 		WSACleanup();
 	}
 };
-
-

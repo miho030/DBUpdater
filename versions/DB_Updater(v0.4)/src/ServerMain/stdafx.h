@@ -8,4 +8,6 @@
 #include <queue> 
 #include <set>
 
+#include "../ServerLib/struct.h"
+
 #pragma comment(lib, "ws2_32.lib")

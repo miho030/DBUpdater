@@ -8,6 +8,7 @@ struct ST_SERVER_INIT
 	std::vector<CConnectionSuper*> connections;
 };
 
+
 class CServer
 {
 private:
