@@ -9,7 +9,7 @@ private:
 	void ConnectionThread();
 
 public:
-	int Establish(SOCKET acceptedSocket);
+	int Establish(SOCKET acceptedSocket, CServer* server);
 	int Send(const LPBYTE pData, size_t tSize);
 	int Recv(LPBYTE pBuffer, size_t BufferSize);
 

@@ -19,10 +19,10 @@ private:
 	std::set<CConnectionSuper*> m_setConnected;
 	std::queue<CConnectionSuper*> m_queDiscon;
 
-	void DisconnectThread();
+	DWORD WINAPI DisconnectThread(LPVOID pContext);
 
 public:
-	void AcceptThread();
+	DWORD WINAPI AcceptThread(LPVOID pContext);
 	int StartUp(ST_SERVER_INIT);
 	void ShutDown();
 	void Broadcast();

@@ -2,7 +2,6 @@
 #include "CServer.h"
 #include "CConnectionSuper.h"
 
-#define PORT 58580
 ST_WSA_INITIALIZER g_WSAInitialize;
 
 
@@ -26,18 +25,12 @@ void printUi(std::string funcName)
 int CServer::StartUp(ST_SERVER_INIT)
 {
 	printUi("ST");
-
-
 	ST_SERVER_INIT init;
-	init.wport = PORT;
-
 	int nRet = 0; // for error handle
-
 
 	/* --------------    socket create    ------------------- */
 	try // socket()
 	{
-		
 		m_ListenSocket = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 		if (SOCKET_ERROR == m_ListenSocket)
 		{
@@ -63,7 +56,6 @@ int CServer::StartUp(ST_SERVER_INIT)
 	service.sin_family = AF_INET;
 	service.sin_addr.s_addr = INADDR_ANY;
 	service.sin_port = htons(init.wport);
-
 
 
 	/* --------------    socket bind    ------------------- */
@@ -102,52 +94,72 @@ int CServer::StartUp(ST_SERVER_INIT)
 		return -1;
 	}
 
+
+	try // queReady가 비어있는지 확인
+	{
+		
+		//m_queReady.empty();
+		/*
+		* 
+		* STL tree 구조일 때는 insert / 큐,셋 은 push
+		* 
+		1. 레디큐에 자리가 있는지 확인
+		2. 없으면 queDisconn -> pop() -> 레디큐.push_back()
+
+
+		*/
+	}
+	catch (const std::exception& ErrMsg)
+	{
+		printf("[ERROR] Queue| `%s`", ErrMsg.what());
+	}
 	return 0;
 }
 
-void CServer::AcceptThread()
+DWORD WINAPI CServer::AcceptThread(LPVOID pContext)
 {
 	printUi("AT");
+	CServer& server = *(CServer*)pContext;
 
-
-	CConnectionSuper* newConnection;
-	
 	sockaddr remoteInfo;
 	int nRemoteInfoSize = (int)sizeof(remoteInfo);
-
+	SOCKET newConnectionSock = ::accept(m_ListenSocket, &remoteInfo, &nRemoteInfoSize);
+	
 	while (true)
 	{
-		SOCKET newConnectionSock = ::accept(m_ListenSocket, &remoteInfo, &nRemoteInfoSize);
 		try // accept error handle
 		{
 			if (INVALID_SOCKET == newConnectionSock)
-			{
-				throw std::exception("Client socket accept failure");
-			}
+			{ throw std::exception("Client socket accept failure"); }
 			else
-			{
-				printf("[INFO] Successfully created accept socket.\n");
-			}
+			{ printf("[INFO] Successfully created accept socket.\n"); }
 		}
 		catch (const std::exception& ErrMsg)
 		{
 			printf("[ERROR] WINAPI:accept() |  `%s`, ErrorCode: `%d`\n", ErrMsg, WSAGetLastError());
-			return;
+			return -1;
 		}
 
-		/*
-		newConnection = m_queReady.pop();
+		// socket accept 되면
+		CConnectionSuper* newConnection = server.m_queReady.front();
 		newConnection->Establish(newConnectionSock, this);
-		m_setConnected.insert(newConnection);
-		*/
+		server.m_setConnected.insert(newConnection);
+	
+	
 	}
 
+
+
+	return 0;
 }
 
 
 
-void CServer::DisconnectThread()
+DWORD WINAPI CServer::DisconnectThread(LPVOID pContext)
 {
+	CServer server = *(CServer*)pContext;
+
+	return 0;
 }
 
 void CServer::ShutDown()

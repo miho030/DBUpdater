@@ -6,7 +6,7 @@ void CConnectionSuper::ConnectionThread()
 {
 }
 
-int CConnectionSuper::Establish(SOCKET acceptedSocket)
+int CConnectionSuper::Establish(SOCKET acceptedSocket, CServer* server)
 {
 	return 0;
 }
@@ -20,4 +20,3 @@ int CConnectionSuper::Recv(LPBYTE pBuffer, size_t BufferSize)
 {
 	return 0;
 }
-

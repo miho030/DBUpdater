@@ -12,4 +12,20 @@
       <UniqueIdentifier>{b9d599b0-4691-4991-a403-d3f0a35327c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CStreamConnection.cpp">
+      <Filter>CStreamConnection</Filter>
+    </ClCompile>
+    <ClCompile Include="StreamMain.cpp">
+      <Filter>CStreamConnection</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CStreamConnection.h">
+      <Filter>CStreamConnection</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>CStreamConnection</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
