@@ -96,10 +96,10 @@ int CServer::StartUp(ST_SERVER_INIT)
 
 
 	try // queReady가 비어있는지 확인
-	{
+	{ // 얘가 쓰레드로 계속 돌면서 큐를 확인하는 식으로 하면 좋을듯.
 		
 		//m_queReady.empty();
-		/*
+		/* 
 		* 
 		* STL tree 구조일 때는 insert / 큐,셋 은 push
 		* 
@@ -140,16 +140,26 @@ DWORD WINAPI CServer::AcceptThread(LPVOID pContext)
 			return -1;
 		}
 
-		// socket accept 되면
-		CConnectionSuper* newConnection = server.m_queReady.front();
-		newConnection->Establish(newConnectionSock, this);
-		server.m_setConnected.insert(newConnection);
+
+
+		try // ReadyQ->ConnectedQ 에러 처리 관련
+		{
+			CConnectionSuper* newConnection = server.m_queReady.front(); // ready 큐 하나 가져오기
+			newConnection->Establish(newConnectionSock, this); // CconnectionSuper의 Establish()로 보내기
+			server.m_setConnected.insert(newConnection); // 연결 되면 connected 큐에 넣기
+		}
+		catch (const std::exception& ErrMsg)
+		{
+			printf("[ERROR] QUEUE|Connection  `%s`. ", ErrMsg.what());
+		}
+		
+
+
+
+		
 	
 	
 	}
-
-
-
 	return 0;
 }
 
