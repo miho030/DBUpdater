@@ -141,7 +141,6 @@ DWORD WINAPI CServer::AcceptThread(LPVOID pContext)
 		}
 
 
-
 		try // ReadyQ->ConnectedQ 에러 처리 관련
 		{
 			CConnectionSuper* newConnection = server.m_queReady.front(); // ready 큐 하나 가져오기

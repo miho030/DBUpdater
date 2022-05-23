@@ -19,11 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CStreamConnection.cpp" />
-    <ClCompile Include="StreamMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CStreamConnection.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
