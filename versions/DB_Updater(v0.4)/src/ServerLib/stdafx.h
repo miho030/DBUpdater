@@ -6,6 +6,7 @@
 #include <vector>
 #include <queue> 
 #include <set>
+#include <cstdio>
 
 #include "struct.h"
 

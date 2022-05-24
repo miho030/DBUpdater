@@ -25,5 +25,6 @@ public:
 	DWORD WINAPI AcceptThread(LPVOID pContext);
 	int StartUp(ST_SERVER_INIT);
 	void ShutDown();
+	DWORD WINAPI QueueHandler(SOCKET Handler);
 	void Broadcast();
 };

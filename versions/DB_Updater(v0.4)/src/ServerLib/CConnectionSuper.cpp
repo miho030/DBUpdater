@@ -14,12 +14,13 @@ int CConnectionSuper::Establish(SOCKET acceptedSocket, CServer* server)
 
 int CConnectionSuper::Send(const LPBYTE pData, size_t tSize)
 {
+
 	int BufNum = 0;
 	int readBytes;
 	char fBuf[PACKET_SIZE];
 
 	FILE* fp;
-	fp = fopen("./file/file.png", "wb");
+	fopen_s(&fp, "./file/file.png", "wb");
 	recv(m_Socket, fBuf, PACKET_SIZE, 0);
 	long fSize = atol(fBuf);
 	int totalNum = fSize / PACKET_SIZE +1;
@@ -42,7 +43,7 @@ int CConnectionSuper::Recv(LPBYTE pBuffer, size_t BufferSize)
 	char fBuf[PACKET_SIZE];
 
 	FILE *fp;
-	fp = fopen("./file/file.png", "rb");
+	fopen_s(&fp, "./file/file.png", "rb");
 	fseek(fp, 0, SEEK_END);
 	fSize = ftell(fp);
 	fseek(fp, 0, SEEK_SET);

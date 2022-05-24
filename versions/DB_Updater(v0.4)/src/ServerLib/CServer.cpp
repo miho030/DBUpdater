@@ -94,25 +94,6 @@ int CServer::StartUp(ST_SERVER_INIT)
 		return -1;
 	}
 
-
-	try // queReady가 비어있는지 확인
-	{ // 얘가 쓰레드로 계속 돌면서 큐를 확인하는 식으로 하면 좋을듯.
-		
-		//m_queReady.empty();
-		/* 
-		* 
-		* STL tree 구조일 때는 insert / 큐,셋 은 push
-		* 
-		1. 레디큐에 자리가 있는지 확인
-		2. 없으면 queDisconn -> pop() -> 레디큐.push_back()
-
-
-		*/
-	}
-	catch (const std::exception& ErrMsg)
-	{
-		printf("[ERROR] Queue| `%s`", ErrMsg.what());
-	}
 	return 0;
 }
 
@@ -127,41 +108,22 @@ DWORD WINAPI CServer::AcceptThread(LPVOID pContext)
 	
 	while (true)
 	{
-		try // accept error handle
+		try //accept error handle
 		{
 			if (INVALID_SOCKET == newConnectionSock)
 			{ throw std::exception("Client socket accept failure"); }
 			else
 			{ printf("[INFO] Successfully created accept socket.\n"); }
+			// 
 		}
 		catch (const std::exception& ErrMsg)
 		{
 			printf("[ERROR] WINAPI:accept() |  `%s`, ErrorCode: `%d`\n", ErrMsg, WSAGetLastError());
 			return -1;
 		}
-
-
-		try // ReadyQ->ConnectedQ 에러 처리 관련
-		{
-			CConnectionSuper* newConnection = server.m_queReady.front(); // ready 큐 하나 가져오기
-			newConnection->Establish(newConnectionSock, this); // CconnectionSuper의 Establish()로 보내기
-			server.m_setConnected.insert(newConnection); // 연결 되면 connected 큐에 넣기
-		}
-		catch (const std::exception& ErrMsg)
-		{
-			printf("[ERROR] QUEUE|Connection  `%s`. ", ErrMsg.what());
-		}
-		
-
-
-
-		
-	
-	
 	}
 	return 0;
 }
-
 
 
 DWORD WINAPI CServer::DisconnectThread(LPVOID pContext)
@@ -173,6 +135,55 @@ DWORD WINAPI CServer::DisconnectThread(LPVOID pContext)
 
 void CServer::ShutDown()
 {
+}
+
+
+DWORD WINAPI CServer::QueueHandler(SOCKET Handler)
+{
+	CServer server;
+	SOCKET SockHandler = Handler;
+
+	/* acceptThread에서 얘가 while문 쓰레드로 돌아갈 수 있도록
+		Ready Queue가 없을 때 DisConn Queue가 빌때까지 Ready Queue를 채운다
+	*/
+
+
+	try // DisConn -> Ready
+	{
+		if (!m_queReady.empty())
+		{
+			/*
+				1. Ready queue 앞에 하나 가져오기
+				2. ConnectionSuper의 Establish() 함수로 보내기
+				3. 해당 connection의 ready queue를 connected queue로 보내기
+			*/
+			CConnectionSuper* newConnection = m_queReady.front();
+			newConnection->Establish(SockHandler, this);
+			m_setConnected.insert(newConnection);
+		}
+		else
+		{
+			throw("Server has full connection.");
+			DisconnectThread(&SockHandler);
+			throw("Client Disconnected.");
+			while (!m_queReady.empty())
+			{
+				Sleep(1000);
+				if (!m_queDiscon.empty())
+				{
+					CConnectionSuper* disConnection = m_queDiscon.front();
+					m_queDiscon.pop();
+					m_queReady.push();
+				}
+			}
+		}
+	}
+	catch (const std::exception& ErrMsg)
+	{
+		printf("[ERROR] Queue|Connection  `%s`. ", ErrMsg.what());
+	}
+
+	return 0;
 }
 
 void CServer::Broadcast()
