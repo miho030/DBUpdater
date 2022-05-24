@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="CChatConnection">
+      <UniqueIdentifier>{5d6ff46b-5e3f-45bd-bab9-4348e51b7eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CStreamConnection">
+      <UniqueIdentifier>{b9d599b0-4691-4991-a403-d3f0a35327c9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>CStreamConnection</Filter>
+    </ClInclude>
+    <ClInclude Include="CStreamConnection.h">
+      <Filter>CStreamConnection</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CStreamConnection.cpp">
+      <Filter>CStreamConnection</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
