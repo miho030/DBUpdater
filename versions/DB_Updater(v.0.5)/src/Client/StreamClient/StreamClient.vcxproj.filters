@@ -14,11 +14,12 @@
       <Filter>CStream</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="struct.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StremClient.cpp">
       <Filter>CStream</Filter>
     </ClCompile>
-    <ClCompile Include="[Client]_StreamMain.cpp" />
+    <ClCompile Include="StreamClientMain.cpp" />
   </ItemGroup>
 </Project>

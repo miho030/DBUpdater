@@ -153,9 +153,6 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Client\Client.vcxproj">
-      <Project>{1fa02e1a-7d39-4953-9e61-511fd507bd07}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\ServerFunc\ServerFunc.vcxproj">
       <Project>{38b9f974-b4a9-4e73-812e-cb185257137b}</Project>
     </ProjectReference>

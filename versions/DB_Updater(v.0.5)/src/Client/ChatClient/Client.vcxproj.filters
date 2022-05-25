@@ -6,16 +6,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Client.h">
-      <Filter>CClient</Filter>
-    </ClInclude>
-    <ClInclude Include="struct.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="[Client]_ChatMain.cpp" />
-    <ClCompile Include="Client.cpp">
+    <ClCompile Include="ChatClient.cpp">
       <Filter>CClient</Filter>
     </ClCompile>
+    <ClCompile Include="ChatclientMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ChatClient.h">
+      <Filter>CClient</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="struct.h" />
   </ItemGroup>
 </Project>

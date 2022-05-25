@@ -5,10 +5,6 @@
 #include <iostream>
 #include <string>
 
-#include <vector>
-#include <queue> 
-#include <set>
-
 #include "struct.h"
 
 #pragma comment(lib, "ws2_32.lib")

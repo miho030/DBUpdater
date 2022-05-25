@@ -255,6 +255,7 @@ void CServer::ShutDown()
 
 	/* close server socket */
 	closesocket(m_ListenSocket);
+	WSACleanup();
 }
 
 

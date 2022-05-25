@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Client.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="struct.h" />
+    <ClCompile Include="ChatClient.cpp" />
+    <ClCompile Include="ChatclientMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Client.cpp" />
-    <ClCompile Include="[Client]_ChatMain.cpp" />
+    <ClInclude Include="ChatClient.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="struct.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

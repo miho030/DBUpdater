@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Client.h"
+#include "ChatClient.h"
 
 #define PORT 58080
 
@@ -9,12 +9,12 @@ void PrintUi()
 {
 	printf("#---------------------------------------------------#\n");
 	printf("#              Client Side process started          #\n");
-	printf("#---------------------------------------------------#\n\n");
+	printf("#---------------------------------------------------#\n");
 }
 
 int ClientSend(void)
 {
-	CClient client;
+	CChatClient client;
 	client.ConnectServer("127.0.0.1", PORT);
 	printf("[INFO] Successfully connected to server.\n");
 

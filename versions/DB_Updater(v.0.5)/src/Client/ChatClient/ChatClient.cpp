@@ -1,34 +1,36 @@
 ﻿#include "stdafx.h"
-#include "Client.h"
+#include "ChatClient.h"
 
-CClient::CClient(void)
+
+CChatClient::CChatClient(void)
 {
 }
 
-CClient::~CClient(void)
+CChatClient::~CChatClient(void)
 {
 }
 
 
-int CClient::ConnectServer(const char* pszIP, unsigned short wPort)
+
+int CChatClient::ConnectServer(const char* IPaddr, unsigned short wport)
 {
 	m_ClientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
 	sockaddr_in addr;
-	addr.sin_port = htons(wPort);
-	addr.sin_addr.s_addr = inet_addr(pszIP);
+	addr.sin_port = htons(wport);
+	addr.sin_addr.s_addr = inet_addr(IPaddr);
 	addr.sin_family = AF_INET;
 	return connect(m_ClientSocket, (sockaddr*)&addr, sizeof(addr));
 }
 
 
 /*  Send Recv  */
-int CClient::Send(const char* sData, int sSize)
+int CChatClient::Send(const char* sData, int sSize)
 {
 	return ::send(m_ClientSocket, sData, sSize, 0);
 }
 
-int CClient::Recv(char* rData, int rSize)
+int CChatClient::Recv(char* rData, int rSize)
 {
 	return ::recv(m_ClientSocket, rData, rSize, 0);
 }
@@ -36,7 +38,7 @@ int CClient::Recv(char* rData, int rSize)
 
 
 /*  Close Socket  */
-void CClient::CloseConnection(void)
+void CChatClient::CloseConnection(void)
 {
 	closesocket(m_ClientSocket);
 	return;

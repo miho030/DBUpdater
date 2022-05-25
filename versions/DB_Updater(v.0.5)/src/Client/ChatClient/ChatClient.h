@@ -1,13 +1,13 @@
 #pragma once
-class CClient
+class CChatClient
 {
 	SOCKET m_ClientSocket;
 
 public:
-	CClient(void);
-	~CClient(void);
+	CChatClient(void);
+	~CChatClient(void);
 
-	int ConnectServer(const char* IpAddr, unsigned short wPort);
+	int ConnectServer(const char* IPaddr, unsigned short wport);
 	void CloseConnection(void);
 
 	int Send(const char* pData, int pSize);
