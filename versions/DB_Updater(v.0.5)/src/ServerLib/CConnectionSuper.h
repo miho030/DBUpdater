@@ -20,6 +20,7 @@ public:
 	int Establish(SOCKET acceptedSocket, CServer* pServer);
 	int Send(const char* pData, size_t tSize);
 	int Recv(char* pBuffer, size_t BufferSize);
+	SOCKET getSocket();
 
 	virtual void OnConnection() = 0;
 	virtual void OnRecv() = 0;

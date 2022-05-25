@@ -25,7 +25,7 @@ void printUi(std::string funcName)
 
 	printf("#---------------------------------------------------#\n");
 	printf("                 %s               \n", nFunc.c_str());
-	printf("#---------------------------------------------------#\n\n");
+	printf("#---------------------------------------------------#\n");
 
 	Sleep(800);
 }
@@ -92,7 +92,7 @@ int CServer::StartUp(ST_SERVER_INIT init)
 	}
 	catch (const std::exception& ErrMsg)
 	{
-		printf("[ERROR] WINAPI:socket() | %s, \n\tErrorCode : %d", ErrMsg.what(), WSAGetLastError());
+		printf("*	[ERROR] WINAPI:socket() | %s, \n\tErrorCode : %d", ErrMsg.what(), WSAGetLastError());
 		return -1;
 	}
 	
@@ -115,7 +115,7 @@ int CServer::StartUp(ST_SERVER_INIT init)
 	}
 	catch (const std::exception& ErrMsg)
 	{
-		printf("[ERROR] WINAPI:bind() | %s, \n\tErrorCode : %d", ErrMsg.what(), WSAGetLastError());
+		printf("*	[ERROR] WINAPI:bind() | %s, \n\tErrorCode : %d", ErrMsg.what(), WSAGetLastError());
 		return -1;
 	}
 
@@ -128,15 +128,15 @@ int CServer::StartUp(ST_SERVER_INIT init)
 		if (SOCKET_ERROR == nRet)
 		{  throw std::exception("Create listen socket failure");  }
 		else
-		{  printf("[INFO] Successfully created listen socket.\n");  }
+		{
+			printf("[INFO] Sucessfully load server socket processes.\n");
+		}
 	}
 	catch (const std::exception& ErrMsg)
 	{
-		printf("[ERROR] WINAPI:listen() | `%s`, ErrorCode : %d", ErrMsg.what(), WSAGetLastError());
+		printf("*	[ERROR] WINAPI:listen() | `%s`, ErrorCode : %d", ErrMsg.what(), WSAGetLastError());
 		return -1;
 	}
-
-
 	
 
 	/* --------------    Queue Handler    ----------------- */
@@ -150,7 +150,7 @@ int CServer::StartUp(ST_SERVER_INIT init)
 		WaitForSingleObject(m_DisconnHandler, INFINITE);
 	}
 
-
+	printf("[INFO] Server Execution Successful.\n");
 	return 0;
 }
 
@@ -159,8 +159,10 @@ int CServer::StartUp(ST_SERVER_INIT init)
 
 DWORD CServer::AcceptThread()
 {
+	printf("\n");
 	printUi("AT");
 	printf("[INFO] Waiting for client connection ... \n");
+
 
 	sockaddr remoteInfo;
 	int nRemoteInfoSize = (int)sizeof(remoteInfo);
@@ -182,7 +184,6 @@ DWORD CServer::AcceptThread()
 			return -1;
 		}
 
-
 		/*  Load Establish() & OnConnection() */
 		try
 		{
@@ -198,16 +199,9 @@ DWORD CServer::AcceptThread()
 				
 				// Load Establish() & OnConnection()
 				int nRet = newConnection->Establish(newConnectionSock, this);
-				if (nRet == 0)
-				{
-					newConnection->OnConnection();
-					Sleep(100);
-				}
-				else
+				printf("\n\n* * *\n\n");
+				if (nRet == -1)
 				{  throw std::exception("Server has been failed to accept client socket.");  }
-				
-				/* Disconn queue -> Ready Queue */
-				//DisconnectThread();
 			}
 			else
 			{  throw std::exception("Server has full connection.");  }

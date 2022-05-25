@@ -1,5 +1,5 @@
 #pragma once
-#include "../ServerLib/CConnectionSuper.h"
+#include "../../ServerLib/CConnectionSuper.h"
 
 class CStreamConnection : public CConnectionSuper
 {

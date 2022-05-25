@@ -13,16 +13,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StreamConnection\StreamConnection.h">
       <Filter>CStreamConnection</Filter>
     </ClInclude>
-    <ClInclude Include="CStreamConnection.h">
-      <Filter>CStreamConnection</Filter>
+    <ClInclude Include="ChatConnection\ChatConnection.h">
+      <Filter>CChatConnection</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CStreamConnection.cpp">
+    <ClCompile Include="StreamConnection\StreamConnection.cpp">
       <Filter>CStreamConnection</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatConnection\ChatConnection.cpp">
+      <Filter>CChatConnection</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

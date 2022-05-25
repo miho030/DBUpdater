@@ -19,19 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Client.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="struct.h" />
+    <ClInclude Include="StremClient.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Client.cpp" />
-    <ClCompile Include="clientMain.cpp" />
+    <ClCompile Include="StremClient.cpp" />
+    <ClCompile Include="[Client]_StreamMain.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1fa02e1a-7d39-4953-9e61-511fd507bd07}</ProjectGuid>
-    <RootNamespace>Client</RootNamespace>
+    <ProjectGuid>{62cc03ec-f834-4467-bdde-636594ececd1}</ProjectGuid>
+    <RootNamespace>StreamClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -81,28 +80,28 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>../../Build/$(Platform)$(Configuration)\</OutDir>
-    <IntDir>../../Output/$(Platform)$(Configuration)/$(ProjectName)\</IntDir>
+    <OutDir>../../../Build/$(Platform)$(Configuration)\</OutDir>
+    <IntDir>../../../Output/$(Platform)$(Configuration)/$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>../../Build/$(Platform)$(Configuration)\</OutDir>
-    <IntDir>../../Output/$(Platform)$(Configuration)/$(ProjectName)\</IntDir>
+    <OutDir>../../../Build/$(Platform)$(Configuration)\</OutDir>
+    <IntDir>../../../Output/$(Platform)$(Configuration)/$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>../../Build/$(Platform)$(Configuration)\</OutDir>
-    <IntDir>../../Output/$(Platform)$(Configuration)/$(ProjectName)\</IntDir>
+    <OutDir>../../../Build/$(Platform)$(Configuration)\</OutDir>
+    <IntDir>../../../Output/$(Platform)$(Configuration)/$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>../../Build/$(Platform)$(Configuration)\</OutDir>
-    <IntDir>../../Output/$(Platform)$(Configuration)/$(ProjectName)\</IntDir>
+    <OutDir>../../../Build/$(Platform)$(Configuration)\</OutDir>
+    <IntDir>../../../Output/$(Platform)$(Configuration)/$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -116,7 +115,7 @@
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -130,7 +129,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -144,7 +143,7 @@
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>

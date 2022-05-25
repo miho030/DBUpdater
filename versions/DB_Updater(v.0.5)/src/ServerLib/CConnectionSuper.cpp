@@ -18,24 +18,13 @@ DWORD WINAPI ConnectionThreadCaller(LPVOID pContext)
 	return ConnFuncCaller->ConnectionThread();
 }
 
+
+
+
 DWORD CConnectionSuper::ConnectionThread()
 {
-	while (true)
-	{
-		char szTemp[10];
-		int nReadSize = recv(m_Socket, szTemp, 1, MSG_PEEK);
-
-		// 클라이언트에서 끊었음
-		if (0 == nReadSize)
-			break;
-
-		// 에러발생
-		if (nReadSize < 0)
-			break;
-
-		OnRecv();
-	}
-
+	OnConnection();
+	OnRecv();
 
 	m_pServer->Disconnect(this);
 	OnClose();
@@ -85,5 +74,10 @@ int CConnectionSuper::Send(const char* pData, size_t tSize)
 int CConnectionSuper::Recv(char* pData, size_t BufferSize)
 {
 	return ::recv(m_Socket, pData, BufferSize, 0);
-	return 0;
+}
+
+SOCKET CConnectionSuper::getSocket()
+{
+
+	return m_Socket;
 }

@@ -18,8 +18,8 @@ int ClientSend(void)
 	client.ConnectServer("127.0.0.1", PORT);
 	printf("[INFO] Successfully connected to server.\n");
 
-
 	client.Send("Hey, I want your file.", 22);
+
 	printf("[INFO] msg sended.\n");
 
 	char szBuffer[100 + 1];
@@ -41,13 +41,14 @@ int ClientSend(void)
 int main()
 {
 	PrintUi();
+	printf("* --------------------------------------------------- *\n");
+
 
 	while (true)
 	{
-		printf("* --------------------------------------------------- *\n");
 		ClientSend();
 	}
 	
-
+	system("pause");
 	return 0;
 }
