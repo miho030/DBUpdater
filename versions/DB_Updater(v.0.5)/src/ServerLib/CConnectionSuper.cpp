@@ -64,16 +64,16 @@ int CConnectionSuper::Establish(SOCKET acceptedSocket, CServer* pServer)
 
 
 /*  Send the file func  */
-int CConnectionSuper::Send(const char* pData, size_t tSize)
+int CConnectionSuper::Send(const char* sData, size_t sSize)
 {
-	return ::send(m_Socket, pData, tSize, 0);
+	return ::send(m_Socket, sData, sSize, 0);
 }
 
 
 /*  Recv the file func  */
-int CConnectionSuper::Recv(char* pData, size_t BufferSize)
+int CConnectionSuper::Recv(char* rData, size_t rSize)
 {
-	return ::recv(m_Socket, pData, BufferSize, 0);
+	return ::recv(m_Socket, rData, rSize, 0);
 }
 
 SOCKET CConnectionSuper::getSocket()

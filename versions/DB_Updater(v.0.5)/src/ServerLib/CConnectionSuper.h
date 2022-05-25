@@ -18,8 +18,8 @@ public:
 
 	DWORD ConnectionThread();
 	int Establish(SOCKET acceptedSocket, CServer* pServer);
-	int Send(const char* pData, size_t tSize);
-	int Recv(char* pBuffer, size_t BufferSize);
+	int Send(const char* sData, size_t sSize);
+	int Recv(char* rData, size_t rSize);
 	SOCKET getSocket();
 
 	virtual void OnConnection() = 0;
