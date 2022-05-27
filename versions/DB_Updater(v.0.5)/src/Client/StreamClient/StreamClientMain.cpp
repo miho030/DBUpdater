@@ -18,8 +18,6 @@ void PrintUi()
 int main()
 {
 	PrintUi();
-	printf("hi my client, file updater!!\n");
-
 
 	CStremClient client;
 
@@ -29,7 +27,8 @@ int main()
 	client.Downloader();
 	/*  exit connection  */
 	client.CloseConnection();
-	
 
+
+	system("pause");
 	return 0;
 }

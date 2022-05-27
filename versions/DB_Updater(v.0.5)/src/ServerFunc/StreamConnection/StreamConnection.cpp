@@ -1,8 +1,10 @@
 #include "../stdafx.h"
 #include "StreamConnection.h"
 
+
 #define PKT 1024
 #define MAX_FILE_SIZE 100000
+
 
 
 CStreamConnection::CStreamConnection(void)
@@ -16,14 +18,63 @@ CStreamConnection::~CStreamConnection(void)
 
 void CStreamConnection::OnConnection()
 {
-	printf("[INFO/File]  Successfully recieved file information from client.\n");
+	printf("[INFO/File]  Successfully Connected to Client.\n");
 }
 
 void CStreamConnection::OnRecv()
 {
-	CConnectionSuper* conn;
+	size_t fSize = 0;
+	char fBuf[PKT];
+	int BufNum = 0;
+	int totalSendBytes = 0;
+
+	const char* fDir = "./Sample/Img.jpeg";
 
 	FILE* fp = 0;
+	fopen_s(&fp, fDir, "rb");
+	if (fp == NULL)
+	{
+		printf("[ERROR] File not exist.\n");
+		exit(0);
+	}
+
+	/*  file size  */
+	fseek(fp, 0, SEEK_END);
+	fSize = ftell(fp);
+	int totalBufNum = fSize / sizeof(fBuf) + 1;
+	fseek(fp, 0, SEEK_SET); // fBuf에 파일 사이즈 값 저장됨.
+	
+
+	snprintf(fBuf, sizeof(fBuf), "%d", fSize);
+	printf("[INFO] file size value (fseek)  : %d\n", fSize);
+	
+	int SendBytes = Send(fBuf, sizeof(fBuf));
+	if (SendBytes != 0)
+	{
+		printf("[INFO] Successfully send file size to client.\n");
+	}
+
+	
+
+	/*  file transfer  */
+	while ((SendBytes = fread(fBuf, sizeof(char), sizeof(fBuf), fp)) > 0)
+	{
+
+		Send(fBuf, SendBytes);
+		BufNum++;
+		totalSendBytes += SendBytes;
+		//system("cls");
+		printf("[INFO] In progress : %d / %dByte(s) [%d%%]\n", totalSendBytes, fSize, ((BufNum * 100) / totalBufNum));
+	}
+	fclose(fp);
+
+
+	
+
+
+
+	
+	/*
 	char fBuf[PKT], fSize[MAX_FILE_SIZE];
 	int fileSize, recvdSize;
 
@@ -37,10 +88,15 @@ void CStreamConnection::OnRecv()
 
 
 			ZeroMemory(fBuf, PKT);
-			conn->Recv(fBuf, PKT);
+			Recv(fBuf, PKT);
 
 
 			fopen_s(&fp, fBuf, "rb");
+
+			if (fp == 0)
+			{
+				throw std::exception("File buf is zero.");
+			}
 
 
 			fseek(fp, 0, SEEK_END);
@@ -50,7 +106,7 @@ void CStreamConnection::OnRecv()
 			ZeroMemory(fBuf, PKT);
 			sprintf_s(fBuf, "%d", fileSize);
 
-			conn->Send(fBuf, PKT);
+			Send(fBuf, PKT);
 
 			while (true)
 			{
@@ -80,12 +136,9 @@ void CStreamConnection::OnRecv()
 		}
 
 
-		/* test 
-			printf("[INFO/File]  Successfully send file to client\n");
-			printf("	ㄴ file path: %s  |  file size: %d\n", fBuf, fileSize);
-		*/
 	}
-	return;
+	*/
+	
 }
 
 

@@ -52,13 +52,46 @@ int CStremClient::Recv(char* pBuf, int pSize)
 int CStremClient::Downloader()
 {
 
-	/*  file dexcription  */
+	size_t totalNum;
+	size_t nSize = 0;
+	char fBuf[PKT];
+
+	const char* recvdDir = "./recvdDir/recvdImg.jpeg";
+	
+
 	FILE* fp = 0;
+	fopen_s(&fp, recvdDir, "wb");
+	
+	Recv(fBuf, PKT); // 서버로부터 받은 파일 사이즈가 fBuf에 저장됨
+	long fSize = atol(fBuf); // char -> long 형변환
+
+	totalNum = fSize / PKT + 1; // totalNum이 파일의 전체 사이즈임.
+	printf("[INFO] File size value recieved from Server  : %d\n", totalNum);
+
+
+	while (nSize!=totalNum)
+	{
+		int readBytes = Recv(fBuf, totalNum);
+		nSize++;
+
+		fwrite(fBuf, sizeof(char), readBytes, fp);
+	}
+	printf("[INFO] file downloaded.\n");
+	fclose(fp);
+
+
+
+
+
+
+
+
+
+	/*
 	std::string reqfileName;
 	char fBuf[PKT], fSize[MAX_FILE_SIZE], fname[PKT];
 
 
-	/*  Request to server */
 	while (true)
 	{
 
@@ -72,20 +105,17 @@ int CStremClient::Downloader()
 
 		std::cout << "Set the filename will save : ";
 		std::getline(std::cin, reqfileName);
-		std::cin >> fname;
+		//std::cin >> fname;
 		fflush(stdin);
 
 
-		/* Send 'file direction' to server,  which is stored in server  */
 		Send(reqfileName.c_str(), PKT);
-		/*  Recieve file size from server  */
 		Recv(fBuf, PKT);
 
 		fopen_s(&fp, fname, "wb");
 		int fileSize = atoi(fBuf);
 
 
-		/*  recieve file stream data from server  */
 		while (true)
 		{
 			try
@@ -113,6 +143,7 @@ int CStremClient::Downloader()
 		}
 		fclose(fp);
 	}
+	*/
 
 	return 0;
 }
