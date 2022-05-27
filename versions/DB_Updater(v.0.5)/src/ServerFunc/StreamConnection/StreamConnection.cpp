@@ -3,7 +3,6 @@
 
 
 #define PKT 1024
-#define MAX_FILE_SIZE 100000
 
 
 
@@ -21,14 +20,37 @@ void CStreamConnection::OnConnection()
 	printf("[INFO/File]  Successfully Connected to Client.\n");
 }
 
+const char* GetFileName(const char* file_path)
+{
+	/*  지정된 디렉터리 경로에서 파일 이름 구하기  */
+	const char* file_name = 0;
+	while (*file_path)
+	{
+		if (*file_path == '/' && (file_path + 1) != NULL)
+			file_name = file_path + 1;
+		file_path++;
+	}
+	return file_name;
+}
+
+
 void CStreamConnection::OnRecv()
 {
-	size_t fSize = 0;
+	int fSize = 0;
 	char fBuf[PKT];
 	int BufNum = 0;
 	int totalSendBytes = 0;
 
+	/*  보낼 파일 지정하고 파일 이름/이름의 크기 구하기  */
 	const char* fDir = "./Sample/Img.jpeg";
+	const char* fName = GetFileName(fDir);
+	int fNameSize = sizeof(fName);
+	printf("[FILE] file name/Size is : %s / %d\n", fName, fNameSize);
+
+	/*
+	Send((const char*)fNameSize, fNameSize);  // 파일 이름의 사이즈부터 보낸다..
+	Send(fName, fNameSize); // 파일 이름 전송
+	*/
 
 	FILE* fp = 0;
 	fopen_s(&fp, fDir, "rb");
@@ -66,79 +88,8 @@ void CStreamConnection::OnRecv()
 		//system("cls");
 		printf("[INFO] In progress : %d / %dByte(s) [%d%%]\n", totalSendBytes, fSize, ((BufNum * 100) / totalBufNum));
 	}
+	
 	fclose(fp);
-
-
-	
-
-
-
-	
-	/*
-	char fBuf[PKT], fSize[MAX_FILE_SIZE];
-	int fileSize, recvdSize;
-
-
-	while (true)
-	{
-		try
-		{
-			if (WSAGetLastError())
-			{  throw std::exception("Can not connect to server.");  }
-
-
-			ZeroMemory(fBuf, PKT);
-			Recv(fBuf, PKT);
-
-
-			fopen_s(&fp, fBuf, "rb");
-
-			if (fp == 0)
-			{
-				throw std::exception("File buf is zero.");
-			}
-
-
-			fseek(fp, 0, SEEK_END);
-			fileSize = ftell(fp);
-			fseek(fp, 0, SEEK_SET);
-
-			ZeroMemory(fBuf, PKT);
-			sprintf_s(fBuf, "%d", fileSize);
-
-			Send(fBuf, PKT);
-
-			while (true)
-			{
-				ZeroMemory(fBuf, PKT);
-				ZeroMemory(fSize, MAX_FILE_SIZE);
-
-				recvdSize = fread(fSize, sizeof(char), MAX_FILE_SIZE, fp);
-				_itoa_s(recvdSize, fSize, recvdSize, 0);
-
-				Send(fBuf, PKT);
-				Send(fSize, recvdSize);
-
-				printf("[INFO/FILE]  Sending file ...  | `%d` bytes", recvdSize);
-
-				fileSize -= recvdSize;
-				if (fileSize <= 0)
-				{
-					throw std::exception("Read File failure.");
-				}
-			}
-			fclose(fp);
-		}
-		catch (std::exception& ErrMsg)
-		{
-			printf("[ERROR] Connection|Recieve  |  `%s`\n", ErrMsg.what());
-			break;
-		}
-
-
-	}
-	*/
-	
 }
 
 

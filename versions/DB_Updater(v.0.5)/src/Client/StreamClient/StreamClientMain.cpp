@@ -2,7 +2,7 @@
 #include "StremClient.h"
 
 #define PORT 58080
-#define IP "127.0.0.1"
+#define IP "172.30.100.21"
 
 
 ST_WSA_INITIALIZER g_WSAInitialize;

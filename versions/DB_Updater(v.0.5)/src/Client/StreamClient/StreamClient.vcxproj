@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StremClient.h" />
     <ClInclude Include="struct.h" />
@@ -26,6 +27,12 @@
   <ItemGroup>
     <ClCompile Include="StremClient.cpp" />
     <ClCompile Include="StreamClientMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StreamClient.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\..\..\..\..\Downloads\AOI_icon.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

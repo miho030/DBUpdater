@@ -15,11 +15,22 @@
     </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="struct.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StremClient.cpp">
       <Filter>CStream</Filter>
     </ClCompile>
     <ClCompile Include="StreamClientMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StreamClient.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\..\..\..\..\Downloads\AOI_icon.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>
