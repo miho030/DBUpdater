@@ -2,19 +2,21 @@
 #include "StremClient.h"
 
 #define PKT 1024
+#define SAVE_DIR "./recvdDir/"
+#define SAVE_FILE "./recvdDir/Img.jpeg"
 
 /*  Class Creator & Destructor  */
-CStremClient::CStremClient(void)
+CStreamClient::CStreamClient(void)
 {
 }
-CStremClient::~CStremClient(void)
+CStreamClient::~CStreamClient(void)
 {
 }
 
 
 
 /*  Connection Functions  */
-int CStremClient::ConnectServer(const char* IPaddr, unsigned short wport)
+int CStreamClient::ConnectServer(const char* IPaddr, unsigned short wport)
 {
 	m_ClientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
@@ -26,7 +28,7 @@ int CStremClient::ConnectServer(const char* IPaddr, unsigned short wport)
 	return connect(m_ClientSocket, (sockaddr*)&addr, sizeof(addr));
 }
 
-void CStremClient::CloseConnection(void)
+void CStreamClient::CloseConnection(void)
 {
 	closesocket(m_ClientSocket);
 	WSACleanup();
@@ -36,30 +38,86 @@ void CStremClient::CloseConnection(void)
 
 
 /*  Data Sender & Reciever Functions  */
-int CStremClient::Send(const char* sData, int sSize)
+int CStreamClient::Send(const char* sData, int sSize)
 {
 	return ::send(m_ClientSocket, sData, sSize, 0);
 }
 
-int CStremClient::Recv(char* pBuf, int pSize)
+int CStreamClient::Recv(char* pBuf, int pSize)
 {
 	return recv(m_ClientSocket, pBuf, pSize, 0);
 }
 
-
-
-int CStremClient::Downloader()
+int CStreamClient::FILEnDirExistChecker(const char* fileDir)
 {
-	int readBytes;
+	try
+	{
+		if (_access(fileDir, 0) == -1)
+		{
+			if (1 != CreateDirectoryA(fileDir, NULL))
+			{
+				throw std::exception("Create download directory failure.");
+			}
+			printf("[FILE/INFO] Successfully create download folder.\n");
+			return 0;
+			
+			/*
+			if (-1 != GetFileAttributesA(fileName))
+			{
+				printf("[FILE/INFO] file already exist.\n");
+				return 1;
+			}
+			*/
+		}
+	}
+	catch (std::exception& ErrMsg)
+	{
+		printf("[ERROR] FILE/IO  | `%s`\n", ErrMsg.what());
+	}
+}
+
+
+int CStreamClient::PreLoader(char* fNameBuf)
+{
+	char* NameBuffer = fNameBuf;
+	/*  파일 이름 받기  */
+	int t_fNSize = 0;
+
+	Recv((char*)t_fNSize, (int)sizeof(t_fNSize));
+	Recv(NameBuffer, t_fNSize);
+
+	printf("file name : %s\n", NameBuffer);
+	printf("file name size : %d\n", t_fNSize);
+	
+	return t_fNSize;
+}
+
+
+int CStreamClient::Downloader()
+{
+	char* t_fNameBuf = 0;
 	size_t BufNum = 0;
 	char fBuf[PKT];
 
-	const char* recvdDir = "./recvdImg.jpeg";
-	
+	/*  파일 이름, 크기 받아오이  */
+	if (int fNSize = PreLoader(t_fNameBuf) == NULL)
+	{
+		printf("[ERROR] File name recved failure.\n");
+		return -1;
+	}
 
+	if (1 == FILEnDirExistChecker(SAVE_DIR))
+	{  return 1; }
+
+	//const char* savedName = SAVE_DIR + t_fNameBuf.c_str();
+
+
+	/*  서버로부터 받은 파일명으로 파일 생성  */
 	FILE* fp = 0;
-	fopen_s(&fp, recvdDir, "wb");
-	
+	fopen_s(&fp, t_fNameBuf, "wb");
+
+	int checkNum = 1;
+	Send((const char*)checkNum, sizeof(checkNum));
 
 
 	Recv(fBuf, PKT); // 서버로부터 받은 파일 사이즈가 fBuf에 저장됨
@@ -69,17 +127,22 @@ int CStremClient::Downloader()
 	printf("[INFO] File size value recieved from Server  : %d\n", totalBufNum);
 
 
+	printf(" * * * \n");
 	while (BufNum !=totalBufNum)
 	{
-		readBytes = Recv(fBuf, sizeof(fBuf));
+		int readBytes = Recv(fBuf, sizeof(fBuf));
 		BufNum++;
 
 		fwrite(fBuf, sizeof(char), readBytes, fp);
-		printf("[INFO] In progress : %d / %dByte(s) [%d%%]\n", readBytes, fSize, ((BufNum * 100) / totalBufNum));
+		printf("[DOWNLOAD] In progress : %d / %dByte(s) [%d%%]\n", totalBufNum, fSize, ((BufNum * 100) / totalBufNum));
+	}
+	printf(" * * * \n");
+
+	if (fp == 0)
+	{
+		printf("[FILE/ERROR] file write error.\n");
 	}
 	fclose(fp);
-
-
 	return 0;
 }
 

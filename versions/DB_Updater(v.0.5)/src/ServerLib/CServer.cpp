@@ -181,7 +181,6 @@ DWORD CServer::AcceptThread()
 		catch (const std::exception& ErrMsg)
 		{
 			printf("[ERROR] WINAPI:accept() |  `%s`, ErrorCode: `%d`\n", ErrMsg, WSAGetLastError());
-			return 1;
 		}
 
 		/*  Load Establish() & OnConnection() */

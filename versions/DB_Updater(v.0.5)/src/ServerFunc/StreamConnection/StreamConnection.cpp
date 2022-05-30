@@ -3,7 +3,7 @@
 
 
 #define PKT 1024
-
+#define FILE_DIR "./Sample/Img.jpeg"
 
 
 CStreamConnection::CStreamConnection(void)
@@ -20,10 +20,11 @@ void CStreamConnection::OnConnection()
 	printf("[INFO/File]  Successfully Connected to Client.\n");
 }
 
-const char* GetFileName(const char* file_path)
+
+char* CStreamConnection::GetFileName(char* file_path)
 {
 	/*  지정된 디렉터리 경로에서 파일 이름 구하기  */
-	const char* file_name = 0;
+	char* file_name = 0;
 	while (*file_path)
 	{
 		if (*file_path == '/' && (file_path + 1) != NULL)
@@ -33,6 +34,16 @@ const char* GetFileName(const char* file_path)
 	return file_name;
 }
 
+void CStreamConnection::PreLoader()
+{
+	/*  보낼 파일 지정하고 파일 이름/이름의 크기 구하기  */
+	const char* fName = GetFileName((char*)FILE_DIR);
+	int fNameSize = sizeof(fName);
+	printf("[FILE] file name/Size is : %s / %d\n", fName, fNameSize);
+
+	Send((const char*)fNameSize, (int)sizeof(fNameSize));  // 파일 이름의 사이즈부터 보낸다..
+	Send((char*)fName, (int)sizeof(fNameSize)); // 파일 이름 전송
+}
 
 void CStreamConnection::OnRecv()
 {
@@ -41,24 +52,19 @@ void CStreamConnection::OnRecv()
 	int BufNum = 0;
 	int totalSendBytes = 0;
 
-	/*  보낼 파일 지정하고 파일 이름/이름의 크기 구하기  */
-	const char* fDir = "./Sample/Img.jpeg";
-	const char* fName = GetFileName(fDir);
-	int fNameSize = sizeof(fName);
-	printf("[FILE] file name/Size is : %s / %d\n", fName, fNameSize);
-
-	/*
-	Send((const char*)fNameSize, fNameSize);  // 파일 이름의 사이즈부터 보낸다..
-	Send(fName, fNameSize); // 파일 이름 전송
-	*/
+	const char* fDirptr = FILE_DIR;
 
 	FILE* fp = 0;
-	fopen_s(&fp, fDir, "rb");
+	fopen_s(&fp, fDirptr, "rb");
 	if (fp == NULL)
 	{
-		printf("[ERROR] File not exist.\n");
+		printf("[ERROR] File not exist. OR can not open the file.\n");
 		exit(0);
 	}
+
+	/*  클라이언트에게 파일 이름 전송  */
+	PreLoader();
+
 
 	/*  file size  */
 	fseek(fp, 0, SEEK_END);
@@ -72,24 +78,30 @@ void CStreamConnection::OnRecv()
 	
 	int SendBytes = Send(fBuf, sizeof(fBuf));
 	if (SendBytes != 0)
+	{  printf("[INFO] Successfully send file size to client.\n");  }
+
+
+	int nRet = 0;
+	Recv((char*)nRet, sizeof(nRet));
+
+	if (1 == nRet)
 	{
-		printf("[INFO] Successfully send file size to client.\n");
+		/*  file transfer  */
+		while ((SendBytes = fread(fBuf, sizeof(char), sizeof(fBuf), fp)) > 0)
+		{
+			Send(fBuf, SendBytes);
+			BufNum++;
+			totalSendBytes += SendBytes;
+			//system("cls");
+			printf("[INFO] In progress : %d / %dByte(s) [%d%%]\n", totalSendBytes, fSize, ((BufNum * 100) / totalBufNum));
+		}
+		fclose(fp);
+
+		/*  FIN 패킷 처리  */
+		char tmp;
+		::recv(m_FileServerSocket, (char*)&tmp, (int)sizeof(tmp), 0);
 	}
 
-	
-
-	/*  file transfer  */
-	while ((SendBytes = fread(fBuf, sizeof(char), sizeof(fBuf), fp)) > 0)
-	{
-
-		Send(fBuf, SendBytes);
-		BufNum++;
-		totalSendBytes += SendBytes;
-		//system("cls");
-		printf("[INFO] In progress : %d / %dByte(s) [%d%%]\n", totalSendBytes, fSize, ((BufNum * 100) / totalBufNum));
-	}
-	
-	fclose(fp);
 }
 
 

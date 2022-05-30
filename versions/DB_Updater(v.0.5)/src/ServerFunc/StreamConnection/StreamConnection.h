@@ -10,7 +10,10 @@ public:
 	CStreamConnection(void);
 	~CStreamConnection(void);
 
-
+	char* GetFileName(char* file_path);
+	void PreLoader();
+	void Sender();
+	
 	void OnConnection();
 	void OnRecv();
 	void OnClose();

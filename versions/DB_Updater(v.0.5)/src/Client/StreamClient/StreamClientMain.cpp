@@ -19,7 +19,7 @@ int main()
 {
 	PrintUi();
 
-	CStremClient client;
+	CStreamClient client;
 
 	/*  Create socket & Connect to server  */
 	client.ConnectServer(IP, PORT);
