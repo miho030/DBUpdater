@@ -161,25 +161,32 @@ DWORD CServer::AcceptThread()
 	printUi("AT");
 	printf("[INFO] Waiting for client connection ... \n");
 
-
 	sockaddr remoteInfo;
 	int nRemoteInfoSize = (int)sizeof(remoteInfo);
+	
+	/*  WSADATA 원속 초기화 변수  */
+	WSADATA wsaData;
+	int wsaInit;
+
 
 	/* -----------    Accept Error Handle    -------------- */
 	while (true)
 	{
+		/*  WSAStartup WinSock 초기화  */
+		wsaInit = WSAStartup(MAKEWORD(2, 0), &wsaData);
 		SOCKET newConnectionSock = ::accept(m_ListenSocket, &remoteInfo, &nRemoteInfoSize);
 
-		/*  Accept Socket Error Handle  */
 		try
 		{
 			if (INVALID_SOCKET == newConnectionSock)
-			{  throw std::exception("Client socket accept failure");  }
+			{
+				WSACleanup();
+				throw std::exception("Client socket accept failure");
+			}
 		}
 		catch (const std::exception& ErrMsg)
 		{
 			printf("[ERROR] WINAPI:accept() |  `%s`, ErrorCode: `%d`\n", ErrMsg, WSAGetLastError());
-			return 1;
 		}
 
 		/*  Load Establish() & OnConnection() */
@@ -197,7 +204,7 @@ DWORD CServer::AcceptThread()
 				
 				// Load Establish() & OnConnection()
 				int nRet = newConnection->Establish(newConnectionSock, this);
-				printf("\n\n* * *\n\n");
+				printf("\n\n * * * \n\n");
 				if (nRet == -1)
 				{  throw std::exception("Server has been failed to accept client socket.");  }
 			}
@@ -210,7 +217,7 @@ DWORD CServer::AcceptThread()
 		}
 		/*  end of while  */
 	}
-
+	
 	return 0;
 }
 

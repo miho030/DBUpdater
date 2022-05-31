@@ -54,8 +54,6 @@ int CStremClient::Downloader()
 	size_t BufNum = 0;
 	char fBuf[PKT];
 
-	const char* recvdDir = "./recvdImg.jpeg";
-	
 	char fName[256];
 	ZeroMemory(fName, 256);
 	Recv(fName, sizeof(fName)); // *1 파일 이름 받기
@@ -77,7 +75,7 @@ int CStremClient::Downloader()
 		BufNum++;
 
 		fwrite(fBuf, sizeof(char), readBytes, fp);
-		printf("[DOWNLOAD] In progress : %d / %dByte(s) [%d%%]\n", totalBufNum, fSize, ((BufNum * 100) / totalBufNum));
+		printf("[FILE/DOWNLOAD] In progress : %d / %dByte(s) [%d%%]\n", totalBufNum, fSize, ((BufNum * 100) / totalBufNum));
 	}
 	printf(" * * * \n");
 	fclose(fp);

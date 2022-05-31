@@ -87,7 +87,7 @@ void CStreamConnection::OnRecv()
 		BufNum++;
 		totalSendBytes += SendBytes;
 		//system("cls");
-		printf("[SEND] In progress : %d / %dByte(s) [%d%%]\n", totalSendBytes, fSize, ((BufNum * 100) / totalBufNum));
+		printf("[FILE/SEND] In progress : %d / %dByte(s) [%d%%]\n", totalSendBytes, fSize, ((BufNum * 100) / totalBufNum));
 	}
 	printf(" * * * \n");
 	fclose(fp);

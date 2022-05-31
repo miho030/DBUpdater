@@ -5,7 +5,7 @@
 #include "../ServerFunc/StreamConnection/StreamConnection.h"
 
 #define PORT 58080
-#define MAXIMUM_CONN 5
+#define MAXIMUM_CONN 30
 
 int main(void)
 {
