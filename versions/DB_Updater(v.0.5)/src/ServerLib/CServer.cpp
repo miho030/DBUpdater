@@ -149,8 +149,6 @@ int CServer::StartUp(ST_SERVER_INIT init)
 	{
 		WaitForSingleObject(m_DisconnHandler, INFINITE);
 	}
-
-	printf("[INFO] Server Execution Successful.\n");
 	return 0;
 }
 

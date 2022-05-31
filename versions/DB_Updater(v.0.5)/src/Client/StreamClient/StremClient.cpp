@@ -28,7 +28,7 @@ int CStremClient::ConnectServer(const char* IPaddr, unsigned short wport)
 
 void CStremClient::CloseConnection(void)
 {
-	closesocket(m_ClientSocket);
+	//closesocket(m_ClientSocket);
 	WSACleanup();
 	return;
 }
@@ -56,27 +56,30 @@ int CStremClient::Downloader()
 
 	const char* recvdDir = "./recvdImg.jpeg";
 	
+	char fName[256];
+	ZeroMemory(fName, 256);
+	Recv(fName, sizeof(fName)); // *1 파일 이름 받기
 
 	FILE* fp = 0;
-	fopen_s(&fp, recvdDir, "wb");
+	fopen_s(&fp, fName, "wb");
 	
 
-
-	Recv(fBuf, PKT); // 서버로부터 받은 파일 사이즈가 fBuf에 저장됨
-	long fSize = atol(fBuf); // char -> long 형변환
+	Recv(fBuf, PKT); // *2 파일 사이즈 받기
+	long fSize = atol(fBuf);
 
 	int totalBufNum = fSize / PKT + 1; // totalNum이 파일의 전체 사이즈임.
 	printf("[INFO] File size value recieved from Server  : %d\n", totalBufNum);
 
-
-	while (BufNum !=totalBufNum)
+	printf(" * * * \n");
+	while (BufNum != totalBufNum) 
 	{
-		readBytes = Recv(fBuf, sizeof(fBuf));
+		readBytes = Recv(fBuf, sizeof(fBuf)); // *3 파일 전체 받아오기
 		BufNum++;
 
 		fwrite(fBuf, sizeof(char), readBytes, fp);
-		printf("[INFO] In progress : %d / %dByte(s) [%d%%]\n", readBytes, fSize, ((BufNum * 100) / totalBufNum));
+		printf("[DOWNLOAD] In progress : %d / %dByte(s) [%d%%]\n", totalBufNum, fSize, ((BufNum * 100) / totalBufNum));
 	}
+	printf(" * * * \n");
 	fclose(fp);
 
 

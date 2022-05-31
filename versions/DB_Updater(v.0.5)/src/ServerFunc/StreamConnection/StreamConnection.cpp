@@ -43,14 +43,15 @@ void CStreamConnection::OnRecv()
 
 	/*  보낼 파일 지정하고 파일 이름/이름의 크기 구하기  */
 	const char* fDir = "./Sample/Img.jpeg";
-	const char* fName = GetFileName(fDir);
-	int fNameSize = sizeof(fName);
-	printf("[FILE] file name/Size is : %s / %d\n", fName, fNameSize);
+	const char* t_fName = GetFileName(fDir);
 
-	/*
-	Send((const char*)fNameSize, fNameSize);  // 파일 이름의 사이즈부터 보낸다..
-	Send(fName, fNameSize); // 파일 이름 전송
-	*/
+	char fName[256];
+	ZeroMemory(fName, 256);
+	sprintf_s(fName, t_fName);
+	printf("[FILE] file name/Size is : %s / %d\n", fName, sizeof(fName));
+
+
+	Send((const char*)fName, sizeof(fName)); // *1 파일 이름 보내기
 
 	FILE* fp = 0;
 	fopen_s(&fp, fDir, "rb");
@@ -70,25 +71,25 @@ void CStreamConnection::OnRecv()
 	snprintf(fBuf, sizeof(fBuf), "%d", fSize);
 	printf("[INFO] file size value (fseek)  : %d\n", fSize);
 	
-	int SendBytes = Send(fBuf, sizeof(fBuf));
+	int SendBytes = Send(fBuf, sizeof(fBuf)); // *2 파일 사이즈 보내기
 	if (SendBytes != 0)
 	{
 		printf("[INFO] Successfully send file size to client.\n");
 	}
 
 	
-
+	printf(" * * * \n");
 	/*  file transfer  */
 	while ((SendBytes = fread(fBuf, sizeof(char), sizeof(fBuf), fp)) > 0)
 	{
 
-		Send(fBuf, SendBytes);
+		Send(fBuf, SendBytes); // *3 파일 전체 보내기
 		BufNum++;
 		totalSendBytes += SendBytes;
 		//system("cls");
-		printf("[INFO] In progress : %d / %dByte(s) [%d%%]\n", totalSendBytes, fSize, ((BufNum * 100) / totalBufNum));
+		printf("[SEND] In progress : %d / %dByte(s) [%d%%]\n", totalSendBytes, fSize, ((BufNum * 100) / totalBufNum));
 	}
-	
+	printf(" * * * \n");
 	fclose(fp);
 }
 
@@ -96,8 +97,7 @@ void CStreamConnection::OnRecv()
 /*  Close socket & WSA clean  */
 void CStreamConnection::OnClose()
 {
-	closesocket(m_FileServerSocket);
+	//closesocket(m_FileServerSocket);
 	WSACleanup();
-
 	printf("[INFO/File]  Successfully disconnected from client.\n");
 }

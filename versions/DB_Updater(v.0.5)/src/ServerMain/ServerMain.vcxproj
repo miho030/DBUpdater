@@ -150,6 +150,7 @@
     <ClCompile Include="ServerMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,12 @@
     <ProjectReference Include="..\ServerLib\ServerLib.vcxproj">
       <Project>{ab5314d5-ccff-4e50-94cc-5d586747571f}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ServerMain.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\..\..\..\Downloads\AOI_icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
