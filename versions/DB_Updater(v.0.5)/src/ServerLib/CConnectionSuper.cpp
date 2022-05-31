@@ -20,7 +20,6 @@ DWORD WINAPI ConnectionThreadCaller(LPVOID pContext)
 
 
 
-
 DWORD CConnectionSuper::ConnectionThread()
 {
 	OnConnection();
@@ -32,7 +31,6 @@ DWORD CConnectionSuper::ConnectionThread()
 	
 	return 0;
 }
-
 
 
 /* --------------	Crate Thread    ---------------- */

@@ -47,7 +47,6 @@ int CStremClient::Recv(char* pBuf, int pSize)
 }
 
 
-
 int CStremClient::Downloader()
 {
 	int readBytes;
