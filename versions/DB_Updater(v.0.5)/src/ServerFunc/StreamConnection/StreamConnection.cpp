@@ -1,10 +1,7 @@
 #include "../stdafx.h"
 #include "StreamConnection.h"
 
-
 #define PKT 1024
-
-
 
 CStreamConnection::CStreamConnection(void)
 {
@@ -15,12 +12,14 @@ CStreamConnection::~CStreamConnection(void)
 }
 
 
-void CStreamConnection::OnConnection()
-{
-	printf("[INFO/File]  Successfully Connected to Client.\n");
-}
 
-const char* GetFileName(const char* file_path)
+
+
+
+
+
+/*   Server Util Functions  -> { GetFileName(), TimsStamp() }  */
+const char* CStreamConnection::GetFileName(const char* file_path)
 {
 	/*  지정된 디렉터리 경로에서 파일 이름 구하기  */
 	const char* file_name = 0;
@@ -33,6 +32,48 @@ const char* GetFileName(const char* file_path)
 	return file_name;
 }
 
+void CStreamConnection::TimeStamp()
+{
+	/*  현재 시간 구해서 string 값으로 변환  */
+	time_t CurrentTime = time(NULL);
+	struct tm st_TimeStamp;
+	localtime_s(&st_TimeStamp, &CurrentTime);
+
+	/*
+	std::string year = std::to_string(st_TimeStamp.tm_year + 1900);
+	std::string mon = std::to_string(st_TimeStamp.tm_mon + 1);
+	std::string day = std::to_string(st_TimeStamp.tm_mon + 1);
+
+	std::string hour = std::to_string(st_TimeStamp.tm_hour);
+	std::string min = std::to_string(st_TimeStamp.tm_min);
+	std::string sec = std::to_string(st_TimeStamp.tm_sec);
+
+	printf(" *  %d.%d.%d  |  %d:%d:%d  *\n",
+		st_TimeStamp.tm_year + 1900, st_TimeStamp.tm_mon + 1,
+		st_TimeStamp.tm_mday, st_TimeStamp.tm_hour,
+		st_TimeStamp.tm_min, st_TimeStamp.tm_sec);
+	*/
+
+
+	tm_Date =
+		std::to_string(st_TimeStamp.tm_year + 1900) + "." + 
+		std::to_string(st_TimeStamp.tm_mon + 1) + "." + 
+		std::to_string(st_TimeStamp.tm_mon + 1);
+
+	tm_Time =
+		std::to_string(st_TimeStamp.tm_hour) + ":" +
+		std::to_string(st_TimeStamp.tm_min) + ":" +
+		std::to_string(st_TimeStamp.tm_sec);
+}
+
+
+
+/*   Server Main Functions  ->  { OnConnection(), OnRecv(), OnClose() }  */
+void CStreamConnection::OnConnection()
+{
+	printf("[INFO/File]  Successfully Connected to Client.\n");
+}
+
 
 void CStreamConnection::OnRecv()
 {
@@ -42,7 +83,7 @@ void CStreamConnection::OnRecv()
 	int totalSendBytes = 0;
 
 	/*  보낼 파일 지정하고 파일 이름/이름의 크기 구하기  */
-	const char* fDir = "./Sample/Img.jpeg";
+	const char* fDir = "./Sample/20220531.csv";
 	const char* t_fName = GetFileName(fDir);
 
 	char fName[256];
@@ -57,47 +98,67 @@ void CStreamConnection::OnRecv()
 	fopen_s(&fp, fDir, "rb");
 	if (fp == NULL)
 	{
-		printf("[ERROR] File not exist.\n");
+		_tprintf(TEXT("[ERROR] File not exist.\n"));
 		exit(0);
 	}
 
-	/*  file size  */
+
+	/*  Stored File size value into 'fBuf'  */
 	fseek(fp, 0, SEEK_END);
 	fSize = ftell(fp);
 	int totalBufNum = fSize / sizeof(fBuf) + 1;
-	fseek(fp, 0, SEEK_SET); // fBuf에 파일 사이즈 값 저장됨.
+	fseek(fp, 0, SEEK_SET); // 
 	
 
 	snprintf(fBuf, sizeof(fBuf), "%d", fSize);
-	printf("[INFO] file size value (fseek)  : %d\n", fSize);
+	_tprintf(TEXT("[INFO] file size value (fseek)  : %d\n"), fSize);
 	
-	int SendBytes = Send(fBuf, sizeof(fBuf)); // *2 파일 사이즈 보내기
+	/*  Send to file size to cleint  */
+	int SendBytes = Send(fBuf, sizeof(fBuf));
 	if (SendBytes != 0)
 	{
-		printf("[INFO] Successfully send file size to client.\n");
+		_tprintf(TEXT("[INFO] Successfully send file size to client.\n"));
 	}
 
 	
-	printf(" * * * \n");
-	/*  file transfer  */
+	_tprintf(TEXT(" * * * \n"));
+	/*  Send file to client  */
 	while ((SendBytes = fread(fBuf, sizeof(char), sizeof(fBuf), fp)) > 0)
 	{
-
 		Send(fBuf, SendBytes); // *3 파일 전체 보내기
 		BufNum++;
 		totalSendBytes += SendBytes;
-		//system("cls");
-		printf("[FILE/SEND] In progress : %d / %dByte(s) [%d%%]\n", totalSendBytes, fSize, ((BufNum * 100) / totalBufNum));
+
+		/*  Pretty CLI Start  */
+		Sleep(3);
+		system("cls");
+		printf(" - - - \n\n");
+		
+		_tprintf(TEXT("[FILE/SEND] In progress : %d / %dByte(s) [%d%%]\n"),
+			totalSendBytes, fSize, ((BufNum * 100) / totalBufNum));
+		
+		printf(" - - - \n\n");
+		/*  Pretty CLI End  */
 	}
-	printf(" * * * \n");
 	fclose(fp);
+	
+
+	TimeStamp();
+	
+	_tprintf(TEXT("[INFO] Successfully send file to client.\n\n"));
+	printf("     - File name : %s\n      - File size : %d\n     - Time stamp : %s | %s\n\n",
+		fName, fSize, tm_Date.c_str(), tm_Time.c_str());
+	_tprintf(TEXT("\n * * * \n\n"));
+	
+	return;
 }
 
 
-/*  Close socket & WSA clean  */
 void CStreamConnection::OnClose()
 {
 	//closesocket(m_FileServerSocket);
 	WSACleanup();
-	printf("[INFO/File]  Successfully disconnected from client.\n");
+	_tprintf(TEXT("[INFO/File]  Successfully disconnected from client.\n\n"));
+	_tprintf(TEXT("[INFO] Waiting for new client connection ...\n"));
+	return;
 }

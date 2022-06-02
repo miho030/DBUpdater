@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <tchar.h>
 
 #include "struct.h"
 

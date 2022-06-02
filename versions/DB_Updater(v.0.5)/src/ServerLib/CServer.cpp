@@ -27,7 +27,7 @@ void printUi(std::string funcName)
 	printf("                 %s               \n", nFunc.c_str());
 	printf("#---------------------------------------------------#\n");
 
-	Sleep(800);
+	Sleep(300);
 }
 
 
@@ -164,7 +164,7 @@ DWORD CServer::AcceptThread()
 	sockaddr remoteInfo;
 	int nRemoteInfoSize = (int)sizeof(remoteInfo);
 	
-	/*  WSADATA 원속 초기화 변수  */
+	/*  WSADATA WinSock Initializer  */
 	WSADATA wsaData;
 	int wsaInit;
 
