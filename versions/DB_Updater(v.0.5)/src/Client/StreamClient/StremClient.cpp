@@ -117,7 +117,7 @@ int CStremClient::Downloader()
 	TimeStamp();
 
 	_tprintf(TEXT("[INFO] Successfully downlaod file from server.\n\n"));
-	printf("     - File Name : %s\n      - File Size : %d\n     - TimeStamp : %s | %s\n\n",
+	printf("     - File Name : %s\n     - File Size : %d\n     - TimeStamp : %s | %s\n\n",
 		fName, fSize, tm_Date.c_str(), tm_Time.c_str());
 	_tprintf(TEXT(" * * * \n\n"));
 

@@ -146,7 +146,7 @@ void CStreamConnection::OnRecv()
 	TimeStamp();
 	
 	_tprintf(TEXT("[INFO] Successfully send file to client.\n\n"));
-	printf("     - File name : %s\n      - File size : %d\n     - Time stamp : %s | %s\n\n",
+	printf("     - File name : %s\n     - File size : %d\n     - Time stamp : %s | %s\n\n",
 		fName, fSize, tm_Date.c_str(), tm_Time.c_str());
 	_tprintf(TEXT("\n * * * \n\n"));
 	
