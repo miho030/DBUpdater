@@ -30,7 +30,7 @@ int CStremClient::ConnectServer(const char* IPaddr, unsigned short wport)
 /*  Close Connection && WSAData structure Clean  */
 void CStremClient::CloseConnection(void)
 {
-	//closesocket(m_ClientSocket);
+	closesocket(m_ClientSocket);
 	WSACleanup();
 	
 	_tprintf(TEXT("[INFO] Successfully Disconnected from Update Server.\n"));

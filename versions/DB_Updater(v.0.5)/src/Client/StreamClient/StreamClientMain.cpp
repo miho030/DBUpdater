@@ -21,13 +21,18 @@ int main()
 
 	CStremClient client;
 
+	/* for test
+	for (int i=0; i<5; i++)
+	{
+	} */
+	
+
 	/*  Create socket & Connect to server  */
 	client.ConnectServer(IP, PORT);
 	/*  Download the file from server  */
 	client.Downloader();
 	/*  exit connection  */
 	client.CloseConnection();
-
 
 	system("pause");
 	return 0;

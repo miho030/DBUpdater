@@ -73,9 +73,3 @@ int CConnectionSuper::Recv(char* rData, size_t rSize)
 {
 	return ::recv(m_Socket, rData, rSize, 0);
 }
-
-SOCKET CConnectionSuper::getSocket()
-{
-
-	return m_Socket;
-}
