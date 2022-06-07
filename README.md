@@ -7,12 +7,21 @@ Maintaince with educational purpose, for learning c++ oop class structure
 * minimal file send/download
 * Unidirectional File Transfer System (Server->Client)
 ```
-* * *
 ## Directory tree
 ```
+├─src
+    ├─Client
+    │  ├─ChatClient
+    │  └─StreamClient
+    ├─PacketHeader
+    ├─ServerFunc
+    │  ├─ChatConnection
+    │  └─StreamConnection
+    ├─ServerLib
+    ├─ServerMain
+    └─TestCodes
 ```
 
-* * *
 ## current version
 modifing,
 ```
